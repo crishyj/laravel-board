@@ -13,22 +13,32 @@ class StatusController extends Controller
     public function index($slug){
         $inits = Init::all();
         $user_id = Session::get('user_id');
-        $statuses = Status::where('user_id', '=', $user_id)->get();
-        return view('status.index', compact('inits', 'statuses'));
+        $statuses = Status::where('user_id', '=', $user_id)->get()->sortBy('order');
+        $selecteds = Status::where('user_id', '=', $user_id)->where('selected', '=', 1)->get();
+        return view('status.index', compact('statuses', 'selecteds', 'inits'));
+    }
+
+    public function update(Request $request){       
+        $statuses = Status::where('user_id', '=', session('user_id'))->get();
+        foreach ($statuses as $item) {
+            $item->update(['selected' => 0]);      
+        }
+        $id = $request->get('id');
+        $state = Status::find($id);
+        $state->update(['selected' => 1]);   
+        return response()->json('success');
     }
 
     public function delete($id){
-        
-        // $options = Status::find($id);
-        // if (!$options) {
-        //     return back()->withErrors(['delete' => 'Something went wrong.']);
-        // }       
-        // $options->delete();
-      
-        $user = User::find($id);
-        // return redirect('/'.session('user_id').'/edit_status');
+        $options = User::find($id);
+        $user_id = $options->id;
+        $statuses = Status::where('user_id', '=', $user_id)->get();
+        foreach ($statuses as $item) {
+            $item->delete();
+        }
+        $options->delete();
+        return redirect('/logout');
     }
-
 
     public function updateStatus(){
         $inits = Init::all();
@@ -40,29 +50,15 @@ class StatusController extends Controller
     public function storeStatus(Request $request, $slug){
         $i = 0;
         if($request->ajax()){
-        //     $statuses = Status::where('user_id', '=', session('user_id'))->get();
-        //     $orders =Str::of($request->get('orders'))->explode(',');
-        //     foreach ($statuses as $item)
-        //     { 
-        //         $options = Status::find($item['id']);
-        //         $options->order = $orders[$i];   
-        //         $options->save();
-        //         $i++;
-        //     }
-        //    return response()->json('success');
-
-                $statuses = Status::where('user_id', '=', session('user_id'))->get();
-               
-                foreach ($statuses as $item) {
-                    foreach ($request->order as $order) {
-                        if($order['id'] == $item->id){
-                            $item->update(['order' => $order['position']]);                    
-                        }
+            $statuses = Status::where('user_id', '=', session('user_id'))->get();
+            foreach ($statuses as $item) {
+                foreach ($request->order as $order) {
+                    if($order['id'] == $item->id){
+                        $item->update(['order' => $order['position']]);                    
                     }
+                }
             }
-
             return response('Update Success.', 200);
-          
         }else{
             $validate_array = array(
                 'name'=>'required',            
@@ -106,9 +102,6 @@ class StatusController extends Controller
         return redirect('/'.session('user_id').'/edit_status');
     }
 
-
-
-
     public function updateBoard(){
         $user_id = Session::get('user_id');
         $user = User::find($user_id);
@@ -127,9 +120,7 @@ class StatusController extends Controller
         $options->save();
         $description = $options['description'];
         return view('status.editBoard', ["description"=>$description]);
-
     }
 
-
-
+   
 }

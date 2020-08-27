@@ -23,6 +23,20 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 </head>
 <body>
+    @php
+        $currenttime = Carbon\Carbon::now();
+        $year = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[0];
+        $month = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[1];
+        $date = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[2];
+        $hour = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[0]+8;
+        $min = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[1];
+        $sec = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[2];
+
+        $current = Carbon\Carbon::create($year, $month, $date, $hour, $min, $sec);
+        $start = Carbon\Carbon::create($year, $month, $date, 8, 0, 0);
+        $end = Carbon\Carbon::create($year, $month, $date, 19, 0, 0);           
+    @endphp
+    
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -34,24 +48,19 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
+                    
+                @if ($current->greaterThan($start) && $current->lessThan($end))
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a href="{{route('status_index', Session::get('user_id'))}}">DASHBOARD</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{route('status_edit', Session::get('user_id'))}}">EDIT STATUS</a>
                             </li>
@@ -77,6 +86,10 @@
                             </li>
                         @endguest
                     </ul>
+                @else
+           
+                @endif
+                   
                 </div>
             </div>
         </nav>

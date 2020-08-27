@@ -32,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
         if (auth()->user()->role == 'admin') {
@@ -40,7 +40,7 @@ class RegisterController extends Controller
             session(['user_id' => $user_id]);
             $slug = auth()->user()->slug;
             $id = auth()->user()->id;
-            return '/'.$slug;
+            return '/'.$slug.'/edit';
         }
         return '/';
     }
@@ -66,7 +66,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             // 'name' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],           
-              
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -80,10 +79,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $slug = Str::random(6);
+        $url  = \Request::url();
+        $url = explode('register',$url)[0];
+        $slugUrl = $url.$slug;       
         return User::create([
             'role' => 'admin',            
             'slug' => $slug,
+            'slugUrl' => $slugUrl,
             'password' => Hash::make($data['password']),
         ]);
+        return '/'.$slug.'/edit';
     }
 }

@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `inits` (
 DELETE FROM `inits`;
 /*!40000 ALTER TABLE `inits` DISABLE KEYS */;
 INSERT INTO `inits` (`id`, `status`, `order`, `created_at`, `updated_at`) VALUES
-	(1, 'In a meeting.', 0, '2020-08-26 21:30:50', '2020-08-26 21:30:50'),
-	(2, 'I am on the phone.', 1, '2020-08-26 21:30:50', '2020-08-26 21:30:50'),
-	(3, 'I am available.', 2, '2020-08-26 21:30:50', '2020-08-26 21:30:50');
+	(1, 'In a meeting.', 0, '2020-08-28 23:45:13', '2020-08-28 23:45:13'),
+	(2, 'I am on the phone.', 1, '2020-08-28 23:45:13', '2020-08-28 23:45:13'),
+	(3, 'I am available.', 2, '2020-08-28 23:45:13', '2020-08-28 23:45:13');
 /*!40000 ALTER TABLE `inits` ENABLE KEYS */;
 
 
@@ -53,17 +53,17 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table board.migrations: ~5 rows (approximately)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(41, '2014_10_12_000000_create_users_table', 1),
-	(42, '2014_10_12_100000_create_password_resets_table', 1),
-	(43, '2019_08_19_000000_create_failed_jobs_table', 1),
-	(44, '2020_08_25_040143_create_inits_table', 1),
-	(45, '2020_08_25_115911_create_statuses_table', 1);
+	(46, '2014_10_12_000000_create_users_table', 1),
+	(47, '2014_10_12_100000_create_password_resets_table', 1),
+	(48, '2019_08_19_000000_create_failed_jobs_table', 1),
+	(49, '2020_08_25_040143_create_inits_table', 1),
+	(50, '2020_08_25_115911_create_statuses_table', 1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 
@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slugUrl` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,

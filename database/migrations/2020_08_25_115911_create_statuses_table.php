@@ -18,6 +18,7 @@ class CreateStatusesTable extends Migration
             $table->string('name')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('order')->nullable();
+            $table->integer('selected')->default(0);
             $table->timestamps();
         });
     }

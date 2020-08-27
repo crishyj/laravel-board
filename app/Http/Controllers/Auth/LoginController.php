@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 class LoginController extends Controller
 {
     /*
@@ -41,7 +42,7 @@ class LoginController extends Controller
             session(['user_id' => $user_id]);
             $slug = auth()->user()->slug;
             $id = auth()->user()->id;
-            return '/'.$slug;
+            return '/'.$slug.'/edit';
         }
         return '/';
     }
@@ -58,7 +59,21 @@ class LoginController extends Controller
 
     public function logout(Request $request) {
         Auth::logout();
-        return redirect('/login');
-      }
+        return redirect('/');
+    }
+
+    public function user_login($slug){
+        if (User::where('slug', '=', $slug)->exists()) {
+            return view('auth.statusLogin', ["slug"=>$slug]);
+        }
+        else{
+            return view('auth.nonAuth', ["slug"=>$slug]);
+        }
+
+        
+       
+        // $slug = explode('https://phpenguin.com/', $slug)[1];
+        // 
+    }
   
 }

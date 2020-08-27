@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.register');
 });
 
 
@@ -23,9 +23,13 @@ Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/{slug}', 'StatusController@index')->name('status_index');
+Route::get('/{slug}', '\App\Http\Controllers\Auth\LoginController@user_login')->name('status_login');
+
+
+Route::get('/{slug}/edit', 'StatusController@index')->name('status_index');
+Route::post('/{slug}/edit', 'StatusController@update')->name('status_upate');
 Route::get('/{slug}/id', 'StatusController@delete')->name('user_delete');
 Route::get('/{slug}/edit_status', 'StatusController@updateStatus')->name('status_edit');
 Route::post('/{slug}/edit_status', 'StatusController@storeStatus')->name('status_store');

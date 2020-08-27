@@ -39,11 +39,11 @@
                     </button>
     
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        @if ($current->greaterThan($start) && $current->lessThan($end))
+                        {{-- @if ($current->greaterThan($start) && $current->lessThan($end)) --}}
                             <ul class="navbar-nav ml-auto">
                                 @auth
                                     <li class="nav-item">
-                                        <a href="{{ url('/{slug}') }}">DASHBOARD</a>
+                                        <a href="{{ url('/{slug}/edit') }}">DASHBOARD</a>
                                     </li>
                                     {{-- <li class="nav-item">
                                         <a href="{{route('status_edit', Session::get('user_id'))}}">EDIT STATUS</a>
@@ -62,9 +62,9 @@
                                     @endif
                                 @endauth
                             </ul>
-                        @else
+                        {{-- @else --}}
 
-                        @endif
+                        {{-- @endif --}}
                     </div>
                 </div>
             </nav>
