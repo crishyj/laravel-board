@@ -1,0 +1,89 @@
+.stauts_panel{
+    background: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    color: #000000;
+}
+
+body, .navbar{
+    background: #8E8E8E !important;
+}
+
+.card, .card-header{
+    background: #5D5D5D !important;
+    border: none !important;
+    color: white;
+}
+
+.privacy{
+    background: #FFFFFF;
+    color: #000000;
+    border-radius: 5px;
+}
+
+.navbar-brand{
+    background: #d52a1a;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white !important;
+    font-weight: 600;
+}
+
+.nav-item a{
+    color: #ffffff !important ;
+    margin-top: -9px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+.btn_success1{
+    background: #272C31 !important;
+}
+
+.side{
+    background: #d52a1a;
+    color: white !important;
+    width: fit-content;
+    padding: 5px;
+    transform: rotate(270deg);
+    position: absolute;
+    margin-left: -53px;
+    top: 30vh;
+    z-index: 10;
+}
+
+main{
+    position: relative !important;
+}
+th, td{
+    /* border: none !important; */
+    color: #ffffff !important;
+}
+
+.dropdown-item{
+    background: #8E8E8E !important;
+}
+
+.dropdown-menu{
+    background: #8E8E8E !important;
+    border-color:  #272C31 !important;
+}
+
+.alert-new{
+    color: #d52a1a;
+}
+
+.panel{
+    background: #ffffff;
+    color: #000000;
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 50px;
+}
+
+.panel_01{
+    color: #ffffff;
+    background: #1E7BFF;
+    border-radius: 5px;
+    padding: 10px;
+}
