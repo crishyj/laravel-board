@@ -3,16 +3,13 @@
     $year = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[0];
     $month = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[1];
     $date = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[2];
-    $hour = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[0]+8;
+    $hour = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[0];
     $min = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[1];
     $sec = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[2];
 
     $current = Carbon\Carbon::create($year, $month, $date, $hour, $min, $sec);
     $start = Carbon\Carbon::create($year, $month, $date, 8, 0, 0);
     $end = Carbon\Carbon::create($year, $month, $date, 19, 0, 0); 
-
-    echo $current;
-    die();
     
 @endphp
 

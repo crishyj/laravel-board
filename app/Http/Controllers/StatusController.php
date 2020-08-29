@@ -122,5 +122,19 @@ class StatusController extends Controller
         return view('status.editBoard', ["description"=>$description]);
     }
 
+    public function viewstate($slug){
+        $user  = User::where('slug', '=', $slug)->first();
+        $user_board = $user['description'];
+        $user_id = $user['id'];
+        $selecteds = Status::where('user_id', '=', $user_id)->where('selected', '=', 1)->get();
+        if(count($selecteds) == 0){
+            $selcted_status = "I am in meeting";
+        }
+        else{
+            $selcted_status = $selecteds[0]['name'];
+        }        
+        return view('status.nonauth', ["selectd_status" => $selcted_status, "user_board"=>$user_board, "slug" => $slug]);
+    }
+
    
 }

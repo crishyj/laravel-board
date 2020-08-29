@@ -87,3 +87,8 @@ th, td{
     border-radius: 5px;
     padding: 10px;
 }
+
+.side a{
+    text-decoration: none !important;
+    color: #ffffff !important;
+}

@@ -3,21 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
- 
-
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css')}}" rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet'>
-    <!-- Styles -->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -28,7 +18,7 @@
         $year = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[0];
         $month = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[1];
         $date = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[2];
-        $hour = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[0]+8;
+        $hour = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[0];
         $min = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[1];
         $sec = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[2];
 
@@ -40,9 +30,16 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                @guest
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @else
+                    <a class="navbar-brand" href="{{route('status_index', Session::get('user_id'))}}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @endguest
+               
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -87,6 +84,7 @@
                         @endguest
                     </ul>
                 @else
+               
            
                 @endif
                    

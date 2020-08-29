@@ -67,9 +67,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
 
-    // 'timezone' => 'Asia/Tokyo',
+    'timezone' => 'Asia/Tokyo',
 
 
     /*

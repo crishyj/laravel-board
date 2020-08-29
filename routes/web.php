@@ -25,7 +25,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/{slug}', '\App\Http\Controllers\Auth\LoginController@user_login')->name('status_login');
+Route::get('/{slug}/login', '\App\Http\Controllers\Auth\LoginController@user_login')->name('status_login');
 
 
 Route::get('/{slug}/edit', 'StatusController@index')->name('status_index');
@@ -37,3 +37,5 @@ Route::get('/edit_status/{id}', 'StatusController@deleteStatus')->name('status_d
 
 Route::get('/{slug}/edit_board', 'StatusController@updateBoard')->name('board_edit');
 Route::post('/{slug}/edit_board', 'StatusController@storeBoard')->name('board_store');
+
+Route::get('/{slug}', 'StatusController@viewstate')->name('viewstate');
