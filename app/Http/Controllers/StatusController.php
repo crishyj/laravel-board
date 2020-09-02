@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class StatusController extends Controller
 {
     public function index($slug){
+        config(['site.page' => 'dashboard']);
         $inits = Init::all();
         $user_id = Session::get('user_id');
         $statuses = Status::where('user_id', '=', $user_id)->get()->sortBy('order');
@@ -41,6 +42,7 @@ class StatusController extends Controller
     }
 
     public function updateStatus(){
+        config(['site.page' => 'edit_status']);
         $inits = Init::all();
         $user_id = Session::get('user_id');
         $statuses = Status::where('user_id', '=', $user_id)->get()->sortBy('order');
@@ -103,6 +105,7 @@ class StatusController extends Controller
     }
 
     public function updateBoard(){
+        config(['site.page' => 'edit_board']);
         $user_id = Session::get('user_id');
         $user = User::find($user_id);
         $description = $user['description'];

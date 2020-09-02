@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="side">
-    <span>YOTEI BOARD</span> <i class="fas fa-fw fa-cog"></i>
+   <a href="{{route('status_index', Session::get('user_id'))}}"> <span>YOTEI BOARD</span> <i class="fas fa-fw fa-cog"></i></a>
 </div>
 <div class="container">
     <div class="row justify-content-center">
@@ -19,51 +19,58 @@
                     <input type="hidden" name="slug" class="slug" value="{{Session::get('user_id')}}">
                     <div class="table-responsive">                       
                         <table class="table table-bordered text-center" id="" width="100%" cellspacing="0">
-                        <thead>
+                        {{-- <thead>
                             <tr>
-                            <th style="display: none">
-                                Order
-                            </th>
-                            <th>
-                                Status
-                            </th>
-                            <th>
-                                Change
-                            </th>
-                            <th>
-                                Action
-                            </th>
+                                <th style="display: none">
+                                    Order
+                                </th>
+                                <th style="width:10px; padding: 5, 0;">
+                                
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    
+                                </th>
+                               
                             </tr>
-                        </thead>    
-                        <tbody>
+                        </thead>     --}}
+                        <tbody style="border: none;">
                             @foreach ($inits as $item)
                                 <tr>
                                     <td style="display: none">
                                         {{$item->order}}
                                     </td>
-                                    <td>
+                                    <td class="delete_td">                                      
+                                        <a href="#"class="btn btn-danger mb-2 mr-1  btn-sm btn-delete"><i class="fa fa-trash"></i></a>    
+                                    </td>
+                                    <td class="status_td">
                                         {{$item->status}}
                                     </td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="move_td">
+                                        <i class="fa fa-sort"></i>
+                                    </td>
+                                   
                                 </tr>
                             @endforeach   
                         </tbody>                   
-                        <tbody id="sortable">       
+                        <tbody id="sortable" style="border: none;">       
                             @foreach ($statuses as $item)
                                 <tr class="ui-state-default row1" data-id="{{$item->id}}">
                                     <td style="display: none">
                                         {{$item->order}}
                                     </td>
-                                    <td>
-                                        {{$item->name}}
-                                    </td>
-                                    <td>
-                                        <i class="fa fa-sort"></i>
-                                    </td>
-                                    <td>                                      
+                                    <td class="delete_td">                                      
                                         <a href="{{route('status_delete', $item->id)}}" onclick="return window.confirm('Are you sure?')" class="btn btn-danger mb-2 mr-1  btn-sm btn-delete" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-trash"></i></a>    
                                     </td>
+                                    <td class="status_td">
+                                        {{$item->name}}
+                                    </td>
+                                    <td class="move_td">
+                                        <i class="fa fa-sort"></i>
+                                    </td>
+                                   
                                 </tr>
                             @endforeach
 
@@ -97,6 +104,7 @@
 @section('after_script')
     <script>
         $(document).ready(function(){
+            $('.navbar-brand').css('display', 'none');
             $( "#sortable" ).sortable({
                 items: "tr",
                 cursor: 'move',

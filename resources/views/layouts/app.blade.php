@@ -1,3 +1,6 @@
+@php
+    $page = config('site.page');
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -13,23 +16,11 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 </head>
 <body>
-    @php
-        $currenttime = Carbon\Carbon::now();
-        $year = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[0];
-        $month = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[1];
-        $date = (int)explode("-", explode(" ", $currenttime->toDateTimeString())[0])[2];
-        $hour = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[0];
-        $min = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[1];
-        $sec = (int)explode(":", explode(" ", $currenttime->toDateTimeString())[1])[2];
-
-        $current = Carbon\Carbon::create($year, $month, $date, $hour, $min, $sec);
-        $start = Carbon\Carbon::create($year, $month, $date, 8, 0, 0);
-        $end = Carbon\Carbon::create($year, $month, $date, 19, 0, 0);           
-    @endphp
+   
     
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 @guest
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
@@ -46,26 +37,25 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
-                @if ($current->greaterThan($start) && $current->lessThan($end))
                     <ul class="navbar-nav ml-auto">
                         @guest
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
-                            <li class="nav-item">
+                            {{-- <li class="nav-item @if($page == 'dashboard') mm-active @endif">
                                 <a href="{{route('status_index', Session::get('user_id'))}}">DASHBOARD</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item @if($page == 'edit_status') mm-active @endif">
                                 <a href="{{route('status_edit', Session::get('user_id'))}}">EDIT STATUS</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item @if($page == 'edit_board') mm-active @endif">
                                 <a href="{{route('board_edit', Session::get('user_id'))}}">EDIT BOARD</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->slug }} <span class="caret"></span>
                                 </a>
 
@@ -83,10 +73,7 @@
                             </li>
                         @endguest
                     </ul>
-                @else
-               
-           
-                @endif
+                
                    
                 </div>
             </div>

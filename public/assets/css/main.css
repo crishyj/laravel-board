@@ -1,3 +1,10 @@
+body{
+    background: #707070;
+    font-family:kozuka-gothic-pr6n, sans-serif !important;
+    font-weight: 400;
+   
+}
+
 .stauts_panel{
     background: #FFFFFF;
     padding: 10px;
@@ -13,6 +20,7 @@ body, .navbar{
     background: #5D5D5D !important;
     border: none !important;
     color: white;
+    border-radius: 0;
 }
 
 .privacy{
@@ -47,9 +55,14 @@ body, .navbar{
     padding: 5px;
     transform: rotate(270deg);
     position: absolute;
-    margin-left: -53px;
+    margin-left: -77px;
     top: 30vh;
     z-index: 10;
+    min-width: 65px;
+    min-height: 65px;
+    font-size: 25px;
+    padding-top: 16px;
+    box-shadow: -5px 4px rgb(119 113 113 / 75%);
 }
 
 main{
@@ -91,4 +104,78 @@ th, td{
 .side a{
     text-decoration: none !important;
     color: #ffffff !important;
+}
+
+.shadow-sm{
+    box-shadow: none !important;
+}
+
+label, .card-header{
+    text-shadow: 1.5px 1.5px rgba(150, 150, 150, 0.75);
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.navbar-brand{
+    margin-left: -40px;
+    margin-top: -8px;
+}
+
+.navbar-brand{
+    text-shadow: 1.5px 1.5px rgba(150, 150, 150, 0.75);
+    font-weight: 700;
+    font-size: 40px;
+    min-height: 80px;
+    box-shadow: 4px 5px rgb(119 113 113 / 75%);
+}
+
+
+.mm-active a{
+    color: #d52a1a !important;
+}
+
+label, .form-group label{
+    font-size: 25px;
+}
+
+.navbar-toggler{
+    display: none;
+}
+
+#update_status{
+    background: #1E7BFF;
+    color: #ffffff;
+}
+
+
+.delete_td{
+    width:10px; 
+    padding: 5px, 0; 
+    background: #efefef; 
+    background: #464242; 
+    border: none !important;
+}
+
+.move_td{
+    width: 5px; 
+    padding: 5px, 0; 
+    border:none !important;
+}
+
+.status_td{
+    background: #ffffff; 
+    color: #000000 !important;
+}
+
+.fa-sort{
+    background: #ff0000; 
+    color: #ffffff; 
+    padding: 10px 8px;
+}
+
+@media(max-width: 768px){
+    .navbar-brand{
+        margin-left: -17px;
+        margin-top: -16px;
+    }
 }

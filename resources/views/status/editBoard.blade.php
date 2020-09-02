@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="side">
-    <span>YOTEI BOARD</span> <i class="fas fa-fw fa-cog"></i>
+    <a href="{{route('status_index', Session::get('user_id'))}}"> <span>YOTEI BOARD</span> <i class="fas fa-fw fa-cog"></i> </a>
 </div>
 <div class="container">
     <div class="row justify-content-center">
@@ -44,6 +44,17 @@
     </div>
 </div>
 @endsection
+
+
+@section('after_script')
+    <script>
+        $(document).ready(function(){
+            $('.navbar-brand').css('display', 'none');
+        });
+    </script>
+    
+@endsection
+
 
 
 
